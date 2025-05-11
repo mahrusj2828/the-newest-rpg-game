@@ -430,7 +430,7 @@ position = Vector2(78, -37)
 shape = SubResource("CircleShape2D_klps8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(78, -36)
+position = Vector2(78, -37)
 sprite_frames = SubResource("SpriteFrames_ny4sr")
 animation = &"front_attack"
 offset = Vector2(0, -15)
@@ -446,6 +446,18 @@ wait_time = 0.5
 
 [node name="deal_attack_timer" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(78, -42)
+zoom = Vector2(6, 6)
+limit_left = 0
+limit_top = 0
+limit_right = 526
+limit_bottom = 224
+limit_smoothed = true
+rotation_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]

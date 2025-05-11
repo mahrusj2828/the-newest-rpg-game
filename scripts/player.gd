@@ -1,15 +1,16 @@
 extends CharacterBody2D
+
 var enemy_inattack_range = false
 var enemy_attack_cooldown = true
 var health = 150
 var player_alive = true
 var attack_ip = false
 const speed = 100
-var current_dir = "none"
+var current_dir = "down"  # Changed default direction to "down"
 
 func _ready():
 	$AnimatedSprite2D.play("front_idle")
-
+	
 func _physics_process(delta):
 	player_movement(delta)
 	enemy_attack()
@@ -20,7 +21,7 @@ func _physics_process(delta):
 		health = 0
 		print("player has been killed")
 		self.queue_free()
-
+		
 func player_movement(delta):
 	# Reset velocity when no keys are pressed
 	velocity = Vector2.ZERO
@@ -83,25 +84,25 @@ func play_anim(movement):
 		elif movement == 0:
 			if attack_ip == false:
 				anim.play("back_idle")
-
+				
 func player():
 	pass
-
+	
 func _on_player_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("enemy"):
 		enemy_inattack_range = true
-
+		
 func _on_player_hitbox_body_exited(body: Node2D) -> void:
 	if body.has_method("enemy"):
 		enemy_inattack_range = false
-
+		
 func enemy_attack():
 	if enemy_inattack_range and enemy_attack_cooldown == true:
 		health = health - 20
 		enemy_attack_cooldown = false
 		$attack_cooldown.start()
-		print(health)
-
+		print("Player health: ", health)
+		
 func _on_attack_cooldown_timeout() -> void:
 	enemy_attack_cooldown = true
 	
